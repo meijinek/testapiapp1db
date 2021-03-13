@@ -33,9 +33,12 @@ with app.app_context():
 
 
 class Item(Resource):
-    #  parses json in incoming http request, we only want price in the json body, name is provided in the route
+    #  parses json in incoming http request
+    #  we only want price in the json body
+    #  name is provided in the route
     parser = reqparse.RequestParser()
-    parser.add_argument('price',
+    parser.add_argument(
+            'price',
             type=float,
             required=True,
             help="Cannot be left blank"
@@ -96,7 +99,8 @@ class Item(Resource):
             },
             ReturnValues='ALL_OLD'
         )
-        if 'Attributes' in result:  # Attributes key will be returned by boto3 if the item exists in the table
+        # Attributes key will be returned by boto3 if the item exists in the table
+        if 'Attributes' in result:
             return {'message': 'item deleted'}
         return {'message': 'item does not exist'}
 
