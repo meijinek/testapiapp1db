@@ -10,7 +10,7 @@ api = Api(application)
 
 #  setting up the dynamodb table
 #  no profile_name for elasticbeanstalk, will use an IAM role
-boto_sess = Session()
+boto_sess = Session(region_name="eu-west-2")
 
 application.config['DYNAMO_TABLES'] = [
     {
