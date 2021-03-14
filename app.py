@@ -5,13 +5,13 @@ from boto3.session import Session
 from helpers import decimal_to_float, convert_to_decimal
 
 # Elastic Beanstalk requires the Flask instance to be called application
-application = app = Flask(__name__)
-api = Api(app)
+application = Flask(__name__)
+api = Api(application)
 
 #  setting up the dynamodb table
 boto_sess = Session(profile_name="dynamodb-adminuser")
 
-app.config['DYNAMO_TABLES'] = [
+application.config['DYNAMO_TABLES'] = [
     {
          'TableName':  'ItemTable',
          'AttributeDefinitions': [{
@@ -25,11 +25,11 @@ app.config['DYNAMO_TABLES'] = [
          'BillingMode': 'PAY_PER_REQUEST'
     }
 ]
-app.config['DYNAMO_SESSION'] = boto_sess
+application.config['DYNAMO_SESSION'] = boto_sess
 
-dynamo = Dynamo(app)
+dynamo = Dynamo(application)
 
-with app.app_context():
+with application.app_context():
     dynamo.create_all()
 
 
@@ -134,4 +134,4 @@ api.add_resource(Item, '/item/<string:name>')
 api.add_resource(ItemList, '/items')
 
 
-app.run()
+application.run()
