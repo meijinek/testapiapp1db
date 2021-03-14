@@ -9,7 +9,8 @@ application = Flask(__name__)
 api = Api(application)
 
 #  setting up the dynamodb table
-boto_sess = Session(profile_name="dynamodb-adminuser")
+#  no profile_name for elasticbeanstalk, will use an IAM role
+boto_sess = Session()
 
 application.config['DYNAMO_TABLES'] = [
     {
