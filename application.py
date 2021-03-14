@@ -134,5 +134,8 @@ class ItemList(Resource):
 api.add_resource(Item, '/item/<string:name>')
 api.add_resource(ItemList, '/items')
 
+
+#  app will keep restarting in beanstalk with gunicorn unless the line below is added
+#  https://github.com/benoitc/gunicorn/issues/1801#issuecomment-622409647
 if __name__ == "__main__":
     application.run()
