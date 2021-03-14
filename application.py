@@ -134,5 +134,5 @@ class ItemList(Resource):
 api.add_resource(Item, '/item/<string:name>')
 api.add_resource(ItemList, '/items')
 
-
-application.run()
+if __name__ == "__main__":
+    application.run()
