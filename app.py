@@ -4,7 +4,8 @@ from flask_dynamo import Dynamo
 from boto3.session import Session
 from helpers import decimal_to_float, convert_to_decimal
 
-app = Flask(__name__)
+# Elastic Beanstalk requires the Flask instance to be called application
+application = app = Flask(__name__)
 api = Api(app)
 
 #  setting up the dynamodb table
